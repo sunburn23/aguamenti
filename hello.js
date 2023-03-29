@@ -1,34 +1,31 @@
-require(["esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Search"], function (esriConfig, Map, MapView, Search) {
-    esriConfig.apiKey = "AAPK12a4693efedd46988fd17f1554e3a2f6qMSRQWlXwpZeaM65bVaWvXiQfq-K9RInDk5O45FWN3224pU9Jo1sOYb-HMRHnhh3";
+let map = L.map('map').setView([43.119900, 6], 13);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
 
-    const map = new Map({
-        basemap: "arcgis-topographic" // Basemap layer service
+map.on('click', (e) => {
+    marker = new L.Marker(e.latlng, {
+        draggable: true
     });
 
-    const view = new MapView({
-        map: map,
-        center: [6.128639, 43.120541], // Longitude, latitude
-        zoom: 10, // Zoom level
-        container: "mapView" // Div element
-    });
-    const search = new Search({  //Add Search widget
-        view: view,
-    });
+    console.log(e);
+    L.circle([e.latlng.lat, e.latlng.lng], {radius: 1500}).addTo(map);
 
-    view.on("click", function (event) {
-        console.log('click: ', event);
+    var request = new XMLHttpRequest();
 
-        // Get the coordinates of the click on the view
-        // around the decimals to 3 decimals
-        const lat = Math.round(event.mapPoint.latitude * 1000) / 1000;
-        const lon = Math.round(event.mapPoint.longitude * 1000) / 1000;
+    var method = 'GET';
+    var url = 'https://nominatim.openstreetmap.org/reverse?lat=' + e.latlng.lat + '&lon=' + e.latlng.lng + '&format=json';
+    var async = true;
 
-        view.popup.open({
-            location: event.mapPoint,  // location of the click on the view
-            title: "You clicked here",  // title displayed in the popup
-            content: "This is a point of interest"  // content displayed in the popup
-        });
-    });
-    console.log(search)
-    view.ui.add(search, "top-right"); //Add to the map
-});
+    request.open(method, url, async);
+    request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+            const data = JSON.parse(request.responseText);
+            console.log(data);
+            map.addLayer(marker);
+            marker.bindPopup('<p>You are here: ' + data.address.town + '</p>').openPopup();
+        }
+    };
+    request.send();
+})
