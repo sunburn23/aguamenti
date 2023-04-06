@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Aguamenti</title>
-	<link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css">
-	<script src="https://js.arcgis.com/4.26/"></script>
-	<script src="hello.js"></script>
+    <meta charset="UTF-8">
+    <title>Aguamenti</title>
+    <link href="./style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+            crossorigin=""></script>
 </head>
 <body>
-<style>
-	html,
-	body,
-	#mapView {
-		padding: 0;
-		margin: auto 0;
-		height: 100%;
-		width: 100%;
-	}
-</style>
-<h1>Welcome to Aguamenti.</h1>
-<div id="mapView"></div>
+<nav class="navbar">
+    <ul>
+        <li class="navbar-img"><img src="./img/logo.png"></li>
+        <li class="navbar-title"><img src="./img/aguamenti.png"></li>
+        <li class="navbar-about"><a href="about.asp">About</a></li>
+    </ul>
+</nav>
+<div class="page-container">
+    <div id="map"></div>
+</div>
 </body>
 </html>
+<script src="hello.js"></script>
