@@ -8,6 +8,10 @@ html, body {
 
 }
 
+h6 {
+    font-family: 'Open Sans', sans-serif;
+}
+
 #map {
     margin: auto;
     height: 70%;
@@ -77,4 +81,11 @@ a {
     font-size: 20px;
     font-weight:bold;
     text-decoration: none;
+}
+
+.precipitationsGraph {
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+    height: 500px;
 }
