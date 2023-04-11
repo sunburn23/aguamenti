@@ -16,41 +16,45 @@
 </head>
 <body>
 <nav class="navbar">
-    <ul>
-        <li class="navbar-img"><img src="./img/logo.png"></li>
-        <li class="navbar-title"><img src="./img/aguamenti.png"></li>
-        <li class="navbar-about"><a href="about.asp">About</a></li>
+    <ul class="ul-for-menu">
+        <li class="navbar-title li-for-menu"><img class="aguamenti-logo" src="./img/logo.png">
+            <img class="aguamenti-title" src="./img/aguamenti.png"></li>
     </ul>
 </nav>
 <div class="page-container">
     <div class="column-70">
         <div id="map"></div>
-        <div class="precipitationsGraph">
-            <canvas id="displayPrecipitations"></canvas>
-            <canvas id="displayPh"></canvas>
-            <canvas id="displayNitrate"></canvas>
-
-        </div>
     </div>
     <div class="column-30">
-        <div class="games-rules">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt
-            ut labore et dolore
-            magna aliqua. Nunc faucibus a pellentesque sit amet porttitor. Tempor orci dapibus ultrices in iaculis. Amet
-            luctus venenatis lectus magna fringilla urna. Leo urna molestie at elementum eu facilisis. Neque ornare
-            aenean
-            euismod elementum. Turpis egestas sed tempus urna. Vitae et leo duis ut diam quam nulla. Vitae aliquet nec
-            ullamcorper sit. Consectetur adipiscing elit pellentesque habitant morbi tristique senectus et. Eu consequat
-            ac
-            felis donec et odio. Sed velit dignissim sodales ut eu sem. Erat imperdiet sed euismod nisi porta lorem
-            mollis.
-            Tempor nec feugiat nisl pretium. Tincidunt dui ut ornare lectus sit amet est placerat. Turpis egestas
-            maecenas
-            pharetra convallis posuere. Amet commodo nulla facilisi nullam vehicula. Pretium aenean pharetra magna ac
-            placerat vestibulum. Senectus et netus et malesuada fames ac turpis. At quis risus sed vulputate odio ut
-            enim.
+        <div class="games-rules"><h3>Welcome to the <b class="blue">Aguamenti</b> web application!</h3>
+            <p>This application has been developed in order to display various data about the quality and quantity of
+                water.</p>
+            <hr/>
+
+            <h4>How to use the website?</h4>
+            <ul>
+                <li>Select the city you want to display the data from by clicking on the map</li>
+                <li>In the pop-up, click on the data you want to display</li>
+                <li>The output for the selected area is displayed as a graph with a three-colors palette for quality of
+                    water
+                    resource. A <b style="color: green">green</b> colour signifies good values, an <b
+                            style="color: orange">orange
+                    </b> one - lower than the European standard for
+                    human water consumption, while the <b style="color: red">red</b> color marks values over it.
+                </li>
+            </ul>
+            <hr/>
+            <p>In the future it is possible to envision the introduction of an AI-powered search method that will allow,
+                in the case of available climatic datasets, for the real time generation of the predictions completely
+                on-demand.</p>
         </div>
     </div>
+</div>
+<div class="precipitationsGraph">
+    <canvas id="displayPrecipitations"></canvas>
+    <canvas id="displayPh"></canvas>
+    <canvas id="displayNitrate"></canvas>
+
 </div>
 </body>
 </html>
