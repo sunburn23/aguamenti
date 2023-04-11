@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 html, body {
+    font-family: 'Open Sans', sans-serif;
+    text-justify: distribute;
 
+}
 
+p {
+    text-align: justify;
 }
 
 h6 {
@@ -27,12 +32,13 @@ h6 {
     padding: 10px;
 }
 .column-70 {
+    margin-left: 185px;
     flex-basis: 60%;
 }
 .column-30 {
     z-index: 10;
     flex-basis: 40%;
-    background-color: lightgray;
+    margin-right: 100px;
 }
 
 h1 {
@@ -44,28 +50,32 @@ h1 {
     height: 100px;
 }
 
-ul {
+.ul-for-menu {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 10px;
-    list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-li {
+.li-for-menu {
     display: inline;
 }
 
-img {
+.aguamenti-title {
     width: 100px;
-
 }
 
-.navbar-img {
-    left: 0;
+.aguamenti-logo {
+    width: 100px;
+    margin-right: -60px;
     position: absolute;
+    top: 193px;
+    left: 35px;
+}
+.navbar-img {
+
 }
 
 .navbar-about {
@@ -80,7 +90,7 @@ img {
     position: absolute;
 }
 
-.navbar-title > img {
+.navbar-title > .aguamenti-title {
     width: 500px;
 }
 
@@ -100,3 +110,8 @@ a {
 
 .games-rules {
 }
+
+.blue {
+    color: #025AD1;
+}
+

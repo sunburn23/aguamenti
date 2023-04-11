@@ -24,12 +24,17 @@ map.on('click', (e) => {
         if (request.readyState == 4 && request.status == 200) {
             const data = JSON.parse(request.responseText);
             console.log(data);
-            map.addLayer(marker);
-            marker.bindPopup('<h6>Choose which forecast you want to display :</h6>' +
-                '<hr>' +
-                '<button id="precipitations" onclick="displayPrecipitations()" class="btn btn-primary btn-block m-2">precipitations</button>' +
-                '<button id="ph" onclick="displayPh()" class="btn btn-primary btn-block m-2">ph</button>' +
-                '<button id="precipitations" onclick="displayNitrate()" class="btn btn-primary btn-block m-2">nitrate</button>').openPopup();
+            if (data.address.town === 'Hyères') {
+                map.addLayer(marker);
+                marker.bindPopup('<h6>Choose which forecast you want to display :</h6>' +
+                    '<hr>' +
+                    '<button id="precipitations" onclick="displayPrecipitations()" class="btn btn-primary btn-block m-2">precipitations</button>' +
+                    '<button id="ph" onclick="displayPh()" class="btn btn-primary btn-block m-2">ph</button>' +
+                    '<button id="precipitations" onclick="displayNitrate()" class="btn btn-primary btn-block m-2">nitrate</button>').openPopup();
+            } else {
+                map.addLayer(marker);
+                marker.bindPopup('<p>No data available for now.</p>').openPopup();
+            }
         }
     };
     request.send();
@@ -109,25 +114,34 @@ function displayPrecipitations() {
         data: {
             labels: precipitationsDate,
             datasets: [{
-                label: 'Forecast',
+                label: 'Precipitations',
                 data: precipitationsAmount,
                 borderColor: 'green',
             },
                 {
                     label: 'Lower bound',
                     data: precipitationsLowerBound,
-                    borderColor: 'orange',
+                    borderColor: 'blue',
                 },
                 {
                     label: 'Upper bound',
                     data: precipitationsUpperBound,
-                    borderColor: 'red',
+                    borderColor: 'blue',
                 }]
         },
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    ticks: {
+                        step: 6,
+                        stepValue: 30,
+                        color: (c) => {
+                            if (c['tick']['value'] <= 30) {
+                                return 'orange'
+                            } else return 'black';
+                        }
+                    }
                 }
             }
         }
@@ -214,19 +228,29 @@ function displayPh() {
                 {
                     label: 'Lower bound',
                     data: phLowerBound,
-                    borderColor: 'orange',
+                    borderColor: 'blue',
                 },
                 {
                     label: 'Upper bound',
                     data: phUpperBound,
-                    borderColor: 'red',
+                    borderColor: 'blue',
                 }]
         },
         options: {
             scales: {
                 y: {
-                    min: 7.5,
-                    max: 9
+                    min: 6.5,
+                    max: 8.8,
+                    ticks: {
+                        color: (c) => {
+                            if (c['tick']['value'] >= 8.5) {
+                                return 'red'
+                            } else if (c['tick']['value'] == 6.5) {
+                                return 'orange';
+                            } else return 'green';
+                        }
+
+                    }
                 }
             }
         }
@@ -313,19 +337,22 @@ function displayNitrate() {
                 {
                     label: 'Lower bound',
                     data: nitrateLowerBound,
-                    borderColor: 'orange',
+                    borderColor: 'blue',
                 },
                 {
                     label: 'Upper bound',
                     data: nitrateUpperBound,
-                    borderColor: 'red',
+                    borderColor: 'blue',
                 }]
         },
         options: {
             scales: {
                 y: {
                     min: 3,
-                    max: 9
+                    max: 9,
+                    ticks: {
+                        color: 'green'
+                    }
                 }
             }
         }
