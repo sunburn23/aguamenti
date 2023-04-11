@@ -29,7 +29,7 @@ map.on('click', (e) => {
                 '<hr>' +
                 '<button id="precipitations" onclick="displayPrecipitations()" class="btn btn-primary btn-block m-2">precipitations</button>' +
                 '<button id="ph" onclick="displayPh()" class="btn btn-primary btn-block m-2">ph</button>' +
-                '<button id="precipitations" onclick="displayPrecipitations()" class="btn btn-primary btn-block m-2">nitrate</button>').openPopup();
+                '<button id="precipitations" onclick="displayNitrate()" class="btn btn-primary btn-block m-2">nitrate</button>').openPopup();
         }
     };
     request.send();
@@ -40,59 +40,89 @@ function displayPrecipitations() {
     const precipitations = [
         {
             "date": "2023-06-01",
-            "precipitations": 19.76095571786697
+            "forecast": "19.76095571786697",
+            "lower_bound": 0,
+            "upper_bound": "126.37085453403165"
         },
         {
             "date": "2023-07-01",
-            "precipitations": 5.024122977995916
+            "forecast": "5.024122977995916",
+            "lower_bound": 0,
+            "upper_bound": "111.63402179416062"
         },
         {
             "date": "2023-08-01",
-            "precipitations": 21.22044600654108
+            "forecast": "21.22044600654108",
+            "lower_bound": 0,
+            "upper_bound": "127.83034482270578"
         },
         {
             "date": "2023-09-01",
-            "precipitations": 38.986585182449865
+            "forecast": "38.986585182449865",
+            "lower_bound": 0,
+            "upper_bound": "145.59648399861456"
         },
         {
             "date": "2023-10-01",
-            "precipitations": 46.34306221711207
+            "forecast": "46.34306221711207",
+            "lower_bound": 0,
+            "upper_bound": "152.95296103327675"
         },
         {
             "date": "2023-11-01",
-            "precipitations": 76.74895210740928
+            "forecast": "76.74895210740928",
+            "lower_bound": 0,
+            "upper_bound": "183.35885092357395"
         },
         {
             "date": "2023-12-01",
-            "precipitations": 84.43729909974581
+            "forecast": "84.43729909974581",
+            "lower_bound": 0,
+            "upper_bound": "191.04719791591046"
         },
         {
             "date": "2024-01-01",
-            "precipitations": 16.222818467510365
+            "forecast": "16.222818467510365",
+            "lower_bound": 0,
+            "upper_bound": "122.83271728367501"
         }
     ]
 
     const precipitationsAmount = [];
     const precipitationsDate = [];
+    const precipitationsUpperBound = [];
+    const precipitationsLowerBound = [];
+
 
     precipitations.forEach((item) => {
-        precipitationsAmount.push(item.precipitations);
+        precipitationsAmount.push(item.forecast);
         precipitationsDate.push(item.date);
-
+        precipitationsLowerBound.push(item.lower_bound);
+        precipitationsUpperBound.push(item.upper_bound);
     })
 
     const ctx = document.getElementById('displayPrecipitations');
 
 
     new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: precipitationsDate,
             datasets: [{
-                label: 'precipitations',
+                label: 'Forecast',
                 data: precipitationsAmount,
-                borderWidth: 1
-            }]
+                borderColor: 'green',
+            },
+                {
+                    label: 'Lower bound',
+                    data: precipitationsLowerBound,
+                    borderColor: 'orange',
+                },
+                {
+                    label: 'Upper bound',
+                    data: precipitationsUpperBound,
+                    borderColor: 'red',
+                }]
         },
         options: {
             scales: {
@@ -179,12 +209,12 @@ function displayPh() {
             datasets: [{
                 label: 'PH',
                 data: phAmount,
-                borderColor: 'blue',
+                borderColor: 'green',
             },
                 {
                     label: 'Lower bound',
                     data: phLowerBound,
-                    borderColor: 'green',
+                    borderColor: 'orange',
                 },
                 {
                     label: 'Upper bound',
@@ -196,6 +226,105 @@ function displayPh() {
             scales: {
                 y: {
                     min: 7.5,
+                    max: 9
+                }
+            }
+        }
+    });
+}
+
+function displayNitrate() {
+    const nitrate_data = [
+        {
+            "date": "2023-06-30",
+            "nitrate_forecast": "5.899946379148364",
+            "lower_bound": "4.4969779277475",
+            "upper_bound": "7.302914830549228"
+        },
+        {
+            "date": "2023-07-31",
+            "nitrate_forecast": "5.791667060563707",
+            "lower_bound": "4.244318797882057",
+            "upper_bound": "7.339015323245357"
+        },
+        {
+            "date": "2023-08-31",
+            "nitrate_forecast": "5.6833877419790495",
+            "lower_bound": "4.004026906297299",
+            "upper_bound": "7.3627485776608"
+        },
+        {
+            "date": "2023-09-30",
+            "nitrate_forecast": "6.25081195768505",
+            "lower_bound": "4.449085289508245",
+            "upper_bound": "8.052538625861855"
+        },
+        {
+            "date": "2023-10-31",
+            "nitrate_forecast": "6.3395516952769055",
+            "lower_bound": "4.42325705268739",
+            "upper_bound": "8.255846337866421"
+        },
+        {
+            "date": "2023-11-30",
+            "nitrate_forecast": "6.428291432868761",
+            "lower_bound": "4.40390230831413",
+            "upper_bound": "8.452680557423392"
+        },
+        {
+            "date": "2023-12-31",
+            "nitrate_forecast": "6.364888784107304",
+            "lower_bound": "4.237891487914183",
+            "upper_bound": "8.491886080300425"
+        },
+        {
+            "date": "2024-01-31",
+            "nitrate_forecast": "6.312768147464085",
+            "lower_bound": "4.066608061431871",
+            "upper_bound": "8.5589282334963"
+        }
+    ]
+
+    const nitrateAmount = [];
+    const nitrateLowerBound = [];
+    const nitrateUpperBound = [];
+    const nitrateDate = [];
+
+    nitrate_data.forEach((item) => {
+        nitrateAmount.push(item.nitrate_forecast);
+        nitrateDate.push(item.date);
+        nitrateLowerBound.push(item.lower_bound);
+        nitrateUpperBound.push(item.upper_bound);
+
+    })
+
+    const ctx = document.getElementById('displayNitrate');
+
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: nitrateDate,
+            datasets: [{
+                label: 'Nitrate',
+                data: nitrateAmount,
+                borderColor: 'green',
+            },
+                {
+                    label: 'Lower bound',
+                    data: nitrateLowerBound,
+                    borderColor: 'orange',
+                },
+                {
+                    label: 'Upper bound',
+                    data: nitrateUpperBound,
+                    borderColor: 'red',
+                }]
+        },
+        options: {
+            scales: {
+                y: {
+                    min: 3,
                     max: 9
                 }
             }
