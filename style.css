@@ -15,7 +15,7 @@ h6 {
 }
 
 #map {
-    width: 800px;
+    width: 750px;
     height: 500px;
     border: solid 1px #32a1ce;
     border-radius: 25px
@@ -32,13 +32,13 @@ h6 {
     padding: 10px;
 }
 .column-70 {
-    margin-left: 20px;
-    flex-basis: 60%;
+    margin-left: 40px;
+    flex-basis: 55%;
 }
 .column-30 {
     z-index: 10;
-    flex-basis: 40%;
-    margin-right: 20px;
+    flex-basis: 45%;
+    margin-right: 40px;
 }
 
 h1 {
